@@ -9,14 +9,18 @@ const Layout = () => {
                 <nav>
                     <ul>
                         <Link to="/">
+                            <li>َHome</li>
+                        </Link>
+
+                        <Link to="/costform">
                             <li>َAdd costs</li>
                         </Link>
 
-                        <Link to="/">
+                        <Link to="/incomeform">
                             <li>Add income</li>
                         </Link>
                         
-                        <Link to="/">
+                        <Link to="/addcategory">
                             <li>Add category</li>
                         </Link>
                     </ul>
