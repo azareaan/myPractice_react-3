@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./layout.module.scss"
 import { Link, Outlet } from "react-router-dom";
+import CategoryContextProvider from "../../context/categorycontext"
+import IncomeContextProvider from "../../context/IncomeContext";
+import CostContextProvider from "../../context/costcontext";
 
 const Layout = () => {
     return (
@@ -26,7 +29,13 @@ const Layout = () => {
                     </ul>
                 </nav>
             </div>
-            <Outlet />
+            <CategoryContextProvider>
+                <IncomeContextProvider>
+                    <CostContextProvider>
+                        <Outlet />
+                    </CostContextProvider>
+                </IncomeContextProvider>
+            </CategoryContextProvider>
         </main>
     )
 };

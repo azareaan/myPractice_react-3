@@ -2,11 +2,11 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css'
-import Layout from './assets/components/Layout';
-import Home from './assets/pages/Home/index.jsx'
-import AddCategory from './assets/pages/AddCategory/index.jsx'
-import CostForm from './assets/pages/CostForm/index.jsx'
-import IncomeForm from './assets/pages/IncomeForm/index.jsx'
+import Layout from './components/Layout';
+import Home from './pages/Home/index.jsx'
+import AddCategory from './pages/AddCategory/index.jsx'
+import CostForm from './pages/CostForm/index.jsx'
+import IncomeForm from './pages/IncomeForm/index.jsx'
 
 const router = createBrowserRouter([
   {
