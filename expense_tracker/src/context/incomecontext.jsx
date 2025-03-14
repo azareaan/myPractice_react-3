@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const IncomeContext = createContext();
+export const IncomeContext = createContext();
 
 const IncomeContextProvider = ({children}) => {
     return (

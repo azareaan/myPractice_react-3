@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const CostContext = createContext();
+export const CostContext = createContext();
 
 const CostContextProvider = ({children}) => {
     return (
