@@ -22,12 +22,6 @@ const CostForm = () => {
     const { categories } = useContext(CategoryContext);
     const costCategories = categories.filter(category => category.type === 'cost');
 
-    const category = [
-        "1",
-        "2",
-        "3"
-    ];
-
     const {
             handleSubmit,
             getValues,
@@ -78,7 +72,7 @@ const CostForm = () => {
                 <Controller
                     control={control}
                     name="quantity"
-                    render={({field}) => <Input {...field} label="quantity" type="number" />}
+                    render={({field}) => <Input {...field} label="quantity" type="number" placeholder="quantity" />}
                 />
                 <Controller
                     control={control}
