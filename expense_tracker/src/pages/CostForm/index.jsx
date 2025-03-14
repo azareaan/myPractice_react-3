@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./costform.module.scss"
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -7,6 +7,8 @@ import Input from "../../components/Input";
 import Form from "../../components/Form";
 import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
+import { CostContext, ADD } from "../../context/costcontext";
+import { CategoryContext } from "../../context/categorycontext";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -16,6 +18,10 @@ const validationSchema = Yup.object({
 });
 
 const CostForm = () => {
+    const { dispatch } = useContext(CostContext);
+    const { categories } = useContext(CategoryContext);
+    const costCategories = categories.filter(category => category.type === 'cost');
+
     const category = [
         "1",
         "2",
@@ -26,13 +32,37 @@ const CostForm = () => {
             handleSubmit,
             getValues,
             formState: {errors},
+            reset,
             control
         } = useForm({
-            resolver: yupResolver(validationSchema)
+            resolver: yupResolver(validationSchema),
+            defaultValues: {
+                title: "",
+                quantity: "",
+                date: "",
+                category: ""
+            }
         })
     
         const onSubmit = (values) => {
-            console.log({values, errors});
+            const newCost = {
+                id: Date.now(),
+                title: values.title,
+                quantity: values.quantity,
+                date: values.date,
+                category: values.category
+            };
+            
+            dispatch({type: ADD, payload: newCost});
+            
+            console.log("Cost added:", newCost);
+            
+            reset({
+                title: "",
+                quantity: "",
+                date: "",
+                category: ""
+            });
         }
 
     return (
@@ -58,7 +88,7 @@ const CostForm = () => {
                 <Controller
                     control={control}
                     name="category"
-                    render={({field}) => <InputOption {...field} label="category" items={category} />}
+                    render={({field}) => <InputOption {...field} label="category" items={costCategories} />}
                 />
                 <FormButton buttonText="add"/>
             </Form>
