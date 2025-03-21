@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const InputOption = ({items, label, value, onChange}) => {
     return (
         <>
-            <label htmlfor="selectId">{label}</label>
+            <label htmlFor="selectId">{label}</label>
             <div className={styles.selectContainer}>
                 <select id="selectId" value={value} onChange={onChange}>
                     <option value=""></option>

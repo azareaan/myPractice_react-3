@@ -89,34 +89,32 @@ const List = ({cost, income}) => {
                 </div>
                 <div className={styles.filterSection}>
                     <div className={styles.filterItem}>
-                        <label>دسته‌بندی:</label>
+                        <label>category:</label>
                         <select 
                             value={selectedCategory} 
                             onChange={(e) => setSelectedCategory(e.target.value)}
                         >
-                            <option value="all">همه</option>
+                            <option value="all">all</option>
                             {uniqueCategories.map(category => (
                                 <option key={category} value={category}>{category}</option>
                             ))}
                         </select>
                     </div>
                     
-                    {/* فیلتر نوع تراکنش */}
                     <div className={styles.filterItem}>
-                        <label>نوع تراکنش:</label>
+                        <label>transaction type:</label>
                         <select 
                             value={transactionType} 
                             onChange={(e) => setTransactionType(e.target.value)}
                         >
-                            <option value="all">همه</option>
-                            <option value="income">درآمد</option>
-                            <option value="cost">هزینه</option>
+                            <option value="all">all</option>
+                            <option value="income">income</option>
+                            <option value="cost">cost</option>
                         </select>
                     </div>
                     
-                    {/* فیلتر بازه زمانی */}
                     <div className={styles.filterItem}>
-                        <label>از تاریخ:</label>
+                        <label>from:</label>
                         <input 
                             type="date" 
                             name="startDate"
@@ -126,7 +124,7 @@ const List = ({cost, income}) => {
                     </div>
                     
                     <div className={styles.filterItem}>
-                        <label>تا تاریخ:</label>
+                        <label>to:</label>
                         <input 
                             type="date" 
                             name="endDate"
@@ -135,15 +133,15 @@ const List = ({cost, income}) => {
                         />
                     </div>
                     
-                    <button onClick={resetFilters}>بازنشانی فیلترها</button>
+                    <button onClick={resetFilters}>reset filters</button>
                 </div>
             </div>
 
             <div className={styles.listItem_header}>
-                <p>عنوان</p>
-                <p>دسته‌بندی</p>
-                <p>تاریخ</p>
-                <p>مقدار</p>
+                <p>title</p>
+                <p>category</p>
+                <p>date</p>
+                <p>quantity</p>
             </div>
             
             {filteredResults.length > 0 ? (
@@ -173,77 +171,3 @@ const List = ({cost, income}) => {
 };
 
 export default List;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useRef, useState } from "react";
-// import styles from "./list.module.scss"
-
-// const List = ({cost, income}) => {
-//     const allTransactions = [
-//         ...cost.map(item => ({ ...item, type: 'cost' })),
-//         ...income.map(item => ({ ...item, type: 'income' }))
-//     ];
-//     const searchInputRef = useRef(null);
-//     const [filteredResults, setFilteredResults] = useState(allTransactions);
-
-//     const handleSearch = () => {
-//         const searchTerm = searchInputRef.current.value.toLowerCase();
-//         const filteredData = allTransactions.filter(item => 
-//           item.title.toLowerCase().includes(searchTerm) || item.category.toLowerCase().includes(searchTerm)
-//         );
-        
-//         setFilteredResults(filteredData);
-//       };
-            
-
-
-
-//     return (
-//         <div className={styles.listContainer}>
-            
-//             <div className={styles.listHeader}>
-//                 <input
-//                     type="text"
-//                     ref={searchInputRef}
-//                     placeholder="search..." 
-//                     onChange={() => handleSearch()}
-//                 />
-//                 <button onClick={handleSearch}>search</button>
-//             </div>
-
-//             <div className={styles.listItem_header}>
-//                 <p>title</p>
-//                 <p>category</p>
-//                 <p>date</p>
-//                 <p>quantity</p>
-//             </div>
-//             {filteredResults.map((item) => (
-//                 <div className={styles.listItem} key={item.id}>
-//                     <p>{item.title}</p>
-//                     <p>{item.category}</p>
-//                     <p>{new Date(item.date).toLocaleDateString()}</p>
-//                     <p>{item.type === 'income' ? '+' : '-'}{item.quantity}</p>
-//                 </div>
-//             ))}
-//         </div>
-//     )
-// };
-
-// export default List;

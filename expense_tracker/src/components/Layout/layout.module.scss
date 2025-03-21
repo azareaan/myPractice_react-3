@@ -8,10 +8,35 @@ main{
 }
 
 .layout{
-    width: 200px;
+    min-width: 200px;
     height: 100vh;
+    padding-top: 20px;
     position: sticky;
     top: 0;
     left: 0;
-    background-color: aquamarine;
+    background-color: #65a1fa;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    nav ul{
+        list-style: none;
+
+        a{
+            text-decoration: none;
+        }
+        
+
+        li{
+            margin-bottom: 10px;
+            color: #000;
+            font-size: 16px;
+        }
+    }
+}
+
+h1{
+    font-size: 24px;
+    font-weight: bold;
 }

@@ -15,6 +15,10 @@ const Layout = () => {
                             <li>َHome</li>
                         </Link>
 
+                        <Link to="/transactionlist">
+                            <li>Transactions list</li>
+                        </Link>
+                        
                         <Link to="/costform">
                             <li>َAdd costs</li>
                         </Link>

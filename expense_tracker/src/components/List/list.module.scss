@@ -34,9 +34,44 @@
     
     .filterSection{
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
+        gap: 10px;
+
+        .filterItem{
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 10px;
+            align-items: center;
+
+            label{
+                font-size: 16px;
+                font-weight: bold;
+            }
+            
+            input{
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+            }
+
+            select{
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+            }
+        }
+
+        button{
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
     }
 }
 
@@ -46,7 +81,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    background-color: azure;
+    background-color: antiquewhite;
     padding: 10px 15px;
     position: sticky;
     top: -20px;

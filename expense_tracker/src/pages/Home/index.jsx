@@ -30,7 +30,7 @@ const Home = () => {
         const dataMap = {};
 
         [...costs, ...incomes].forEach(({ date, quantity, id }) => {
-            const month = format(parseISO(date), "yyyy-MM"); // گروه‌بندی بر اساس ماه
+            const month = format(parseISO(date), "yyyy-MM");
             if (!dataMap[month]) {
                 dataMap[month] = { month, income: 0, expense: 0 };
             }
@@ -56,7 +56,7 @@ const Home = () => {
                     <LineChart data={aggregateDataByMonth()}/>
                 </div>
             </div>
-            <Link to="/transactionlist"><button>View Transactions</button></Link>
+            <Link to="/transactionlist"><button className={styles.transactionsShowButton}>View Transactions</button></Link>
         </div>
     )
 };

@@ -4,7 +4,7 @@ import styles from "./formbutton.module.scss"
 const FormButton = ({buttonText}) => {
     return (
         <>
-            <button>{buttonText}</button>
+            <button className={styles.button}>{buttonText}</button>
         </>
     )
 };

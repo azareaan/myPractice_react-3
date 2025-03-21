@@ -2,4 +2,20 @@
     display: flex;
     flex-flow: row nowrap;
     gap: 5px;
+
+    select{
+        width: 100%;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    button{
+        min-width: 120px;
+        background-color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+    }
 }
