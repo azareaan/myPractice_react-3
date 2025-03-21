@@ -7,6 +7,7 @@ import Home from './pages/Home/index.jsx'
 import AddCategory from './pages/AddCategory/index.jsx'
 import CostForm from './pages/CostForm/index.jsx'
 import IncomeForm from './pages/IncomeForm/index.jsx'
+import TransactionList from './pages/TransactionList/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path:"incomeform",
         element:<IncomeForm />
+      },
+      {
+        path:"transactionlist",
+        element:<TransactionList />
       }
     ]
   }

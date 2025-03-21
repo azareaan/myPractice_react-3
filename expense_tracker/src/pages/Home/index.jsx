@@ -5,6 +5,7 @@ import PieChart from "../../components/Charts/PieChart"
 import { CostContext } from "../../context/costcontext";
 import { IncomeContext } from "../../context/incomecontext";
 import { format, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const { costs } = useContext(CostContext);
@@ -55,6 +56,7 @@ const Home = () => {
                     <LineChart data={aggregateDataByMonth()}/>
                 </div>
             </div>
+            <Link to="/transactionlist"><button>View Transactions</button></Link>
         </div>
     )
 };
