@@ -2,8 +2,44 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
-    
 }
+
+.listHeader{
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+
+    .searchSection{
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+
+        input{
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    
+        button{
+            width: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    }
+    
+    .filterSection{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
 
 .listItem_header{
     display: flex;
@@ -24,4 +60,32 @@
     background-color: antiquewhite;
     padding: 10px 15px;
     border-radius: 5px;
+}
+
+.incomeItem{
+    background-color: lightgreen;
+}
+
+.costItem{
+    background-color: lightcoral;
+}
+
+.positiveTotal{
+    color: green;
+}
+
+.negativeTotal{
+    color: lightcoral;
+}
+
+.summarySection{
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-flow: column nowrap;
 }
