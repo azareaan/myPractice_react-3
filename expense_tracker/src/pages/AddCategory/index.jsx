@@ -7,6 +7,8 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import FormButton from "../../components/FormButton";
 import { CategoryContext, ADD } from "../../context/categorycontext";
+import { useDispatch } from "react-redux";
+import { categoryActions } from "../../redux/slices/categorySlice";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -14,7 +16,8 @@ const validationSchema = Yup.object({
 });
 
 const AddCategory = () => {
-    const { dispatch } = useContext(CategoryContext);
+    // const { dispatch } = useContext(CategoryContext);
+    const dispatch = useDispatch();
 
     const {
         handleSubmit,
@@ -37,7 +40,8 @@ const AddCategory = () => {
             type: values.category_type
         };
 
-        dispatch({type: ADD, payload: newCategory});
+        // dispatch({type: ADD, payload: newCategory});
+        dispatch(categoryActions.addCategory(newCategory));
 
         console.log("Category added:", newCategory);
 

@@ -6,10 +6,17 @@ import { CostContext } from "../../context/costcontext";
 import { IncomeContext } from "../../context/incomecontext";
 import { format, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-    const { costs } = useContext(CostContext);
-    const { incomes } = useContext(IncomeContext);
+    // const { costs } = useContext(CostContext);
+    // const { incomes } = useContext(IncomeContext);
+    const { costs, incomes } = useSelector(state => {
+        return {
+            costs: state.cost,
+            incomes: state.income
+        }
+    });
 
     const aggregateCostsByCategory = () => {
         const categoryMap = {};

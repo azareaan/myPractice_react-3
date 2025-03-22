@@ -9,6 +9,8 @@ import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
 import { CostContext, ADD } from "../../context/costcontext";
 import { CategoryContext } from "../../context/categorycontext";
+import { useDispatch, useSelector } from "react-redux";
+import { costActions } from "../../redux/slices/costSlice";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -18,9 +20,12 @@ const validationSchema = Yup.object({
 });
 
 const CostForm = () => {
-    const { dispatch } = useContext(CostContext);
-    const { categories } = useContext(CategoryContext);
+    // const { dispatch } = useContext(CostContext);
+    const dispatch = useDispatch();
+    // const { categories } = useContext(CategoryContext);
+    const categories = useSelector((state) => state.category)
     const costCategories = categories.filter(category => category.type === 'cost');
+    
 
     const {
             handleSubmit,
@@ -43,11 +48,12 @@ const CostForm = () => {
                 id: Date.now(),
                 title: values.title,
                 quantity: values.quantity,
-                date: values.date,
+                date: values.date instanceof Date ? values.date.toISOString() : values.date,
                 category: values.category
             };
             
-            dispatch({type: ADD, payload: newCost});
+            // dispatch({type: ADD, payload: newCost});
+            dispatch(costActions.addCost(newCost));
             
             console.log("Cost added:", newCost);
             

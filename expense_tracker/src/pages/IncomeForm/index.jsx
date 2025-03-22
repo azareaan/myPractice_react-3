@@ -9,6 +9,8 @@ import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
 import { IncomeContext, ADD } from "../../context/incomecontext";
 import { CategoryContext } from "../../context/categorycontext";
+import { useDispatch, useSelector } from "react-redux";
+import { incomeActions } from "../../redux/slices/incomeSlice";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -18,9 +20,11 @@ const validationSchema = Yup.object({
 });
 
 const IncomeForm = () => {
-    const { dispatch } = useContext(IncomeContext);
-        const { categories } = useContext(CategoryContext);
-        const incomeCategories = categories.filter(category => category.type === 'income');
+    // const { dispatch } = useContext(IncomeContext);
+    const dispatch = useDispatch();
+    // const { categories } = useContext(CategoryContext);
+    const categories = useSelector(state => state.category)
+    const incomeCategories = categories.filter(category => category.type === 'income');
 
     const {
         handleSubmit,
@@ -43,11 +47,12 @@ const IncomeForm = () => {
             id: Date.now(),
             title: values.title,
             quantity: values.quantity,
-            date: values.date,
+            date: values.date instanceof Date ? values.date.toISOString() : values.date,
             category: values.category
         };
                     
-        dispatch({type: ADD, payload: newIncome});
+        // dispatch({type: ADD, payload: newIncome});
+        dispatch(incomeActions.addIncome(newIncome));
                     
         console.log("Income added:", newIncome);
                     

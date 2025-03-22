@@ -4,6 +4,8 @@ import { Link, Outlet } from "react-router-dom";
 import CategoryContextProvider from "../../context/categorycontext"
 import IncomeContextProvider from "../../context/incomecontext";
 import CostContextProvider from "../../context/costcontext";
+import { store } from "../../redux";
+import { Provider } from "react-redux";
 
 const Layout = () => {
     return (
@@ -33,13 +35,15 @@ const Layout = () => {
                     </ul>
                 </nav>
             </div>
-            <CategoryContextProvider>
-                <IncomeContextProvider>
-                    <CostContextProvider>
-                        <Outlet />
-                    </CostContextProvider>
-                </IncomeContextProvider>
-            </CategoryContextProvider>
+            <Provider store={store}>
+                <CategoryContextProvider>
+                    <IncomeContextProvider>
+                        <CostContextProvider>
+                            <Outlet />
+                        </CostContextProvider>
+                    </IncomeContextProvider>
+                </CategoryContextProvider>
+            </Provider>
         </main>
     )
 };

@@ -20,9 +20,7 @@ const CostContextProvider = ({children}) => {
     );
 
     useEffect(() => {
-        localStorage.setItem("costs", JSON.stringify(costs));
-        console.log("costs", costs);
-        
+        localStorage.setItem("costs", JSON.stringify(costs));        
     }, []);
     
     return (

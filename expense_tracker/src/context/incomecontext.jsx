@@ -21,7 +21,6 @@ const IncomeContextProvider = ({children}) => {
 
     useEffect(() => {
         localStorage.setItem("incomes", JSON.stringify(incomes));
-        console.log("incomes", incomes);
     }, []);
 
     return (
