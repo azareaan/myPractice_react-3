@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./home.module.scss"
 import LineChart from "../../components/Charts/LineChart"
 import PieChart from "../../components/Charts/PieChart"
-import { CostContext } from "../../context/costcontext";
-import { IncomeContext } from "../../context/incomecontext";
 import { format, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-    // const { costs } = useContext(CostContext);
-    // const { incomes } = useContext(IncomeContext);
     const { costs, incomes } = useSelector(state => {
         return {
             costs: state.cost,

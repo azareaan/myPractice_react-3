@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./costform.module.scss"
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -7,8 +7,6 @@ import Input from "../../components/Input";
 import Form from "../../components/Form";
 import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
-import { CostContext, ADD } from "../../context/costcontext";
-import { CategoryContext } from "../../context/categorycontext";
 import { useDispatch, useSelector } from "react-redux";
 import { costActions } from "../../redux/slices/costSlice";
 
@@ -20,9 +18,7 @@ const validationSchema = Yup.object({
 });
 
 const CostForm = () => {
-    // const { dispatch } = useContext(CostContext);
     const dispatch = useDispatch();
-    // const { categories } = useContext(CategoryContext);
     const categories = useSelector((state) => state.category)
     const costCategories = categories.filter(category => category.type === 'cost');
     
@@ -52,7 +48,6 @@ const CostForm = () => {
                 category: values.category
             };
             
-            // dispatch({type: ADD, payload: newCost});
             dispatch(costActions.addCost(newCost));
             
             console.log("Cost added:", newCost);

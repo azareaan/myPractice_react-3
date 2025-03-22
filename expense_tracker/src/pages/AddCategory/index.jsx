@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./addcategory.module.scss"
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import FormButton from "../../components/FormButton";
-import { CategoryContext, ADD } from "../../context/categorycontext";
 import { useDispatch } from "react-redux";
 import { categoryActions } from "../../redux/slices/categorySlice";
 
@@ -16,7 +15,6 @@ const validationSchema = Yup.object({
 });
 
 const AddCategory = () => {
-    // const { dispatch } = useContext(CategoryContext);
     const dispatch = useDispatch();
 
     const {
@@ -40,7 +38,6 @@ const AddCategory = () => {
             type: values.category_type
         };
 
-        // dispatch({type: ADD, payload: newCategory});
         dispatch(categoryActions.addCategory(newCategory));
 
         console.log("Category added:", newCategory);

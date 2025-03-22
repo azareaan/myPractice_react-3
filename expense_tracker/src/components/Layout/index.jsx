@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./layout.module.scss"
 import { Link, Outlet } from "react-router-dom";
-import CategoryContextProvider from "../../context/categorycontext"
-import IncomeContextProvider from "../../context/incomecontext";
-import CostContextProvider from "../../context/costcontext";
 import { store } from "../../redux";
 import { Provider } from "react-redux";
 
@@ -36,13 +33,7 @@ const Layout = () => {
                 </nav>
             </div>
             <Provider store={store}>
-                <CategoryContextProvider>
-                    <IncomeContextProvider>
-                        <CostContextProvider>
-                            <Outlet />
-                        </CostContextProvider>
-                    </IncomeContextProvider>
-                </CategoryContextProvider>
+                <Outlet />
             </Provider>
         </main>
     )

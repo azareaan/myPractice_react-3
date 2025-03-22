@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./incomeform.module.scss";
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -7,8 +7,6 @@ import Input from "../../components/Input";
 import Form from "../../components/Form";
 import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
-import { IncomeContext, ADD } from "../../context/incomecontext";
-import { CategoryContext } from "../../context/categorycontext";
 import { useDispatch, useSelector } from "react-redux";
 import { incomeActions } from "../../redux/slices/incomeSlice";
 
@@ -20,9 +18,7 @@ const validationSchema = Yup.object({
 });
 
 const IncomeForm = () => {
-    // const { dispatch } = useContext(IncomeContext);
     const dispatch = useDispatch();
-    // const { categories } = useContext(CategoryContext);
     const categories = useSelector(state => state.category)
     const incomeCategories = categories.filter(category => category.type === 'income');
 
@@ -51,7 +47,6 @@ const IncomeForm = () => {
             category: values.category
         };
                     
-        // dispatch({type: ADD, payload: newIncome});
         dispatch(incomeActions.addIncome(newIncome));
                     
         console.log("Income added:", newIncome);
