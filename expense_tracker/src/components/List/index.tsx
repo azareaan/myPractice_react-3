@@ -1,19 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./list.module.scss"
-
-// Define types for costs and incomes
-type Transaction = {
-    id: number;
-    title: string;
-    date: string;
-    quantity: number;
-    category: string;
-}
-
-type RootState = {
-    cost: Transaction[];
-    income: Transaction[];
-}
+import { RootState } from "../../types";
 
 const List = ({cost, income}: RootState) => {
     const allTransactions = [

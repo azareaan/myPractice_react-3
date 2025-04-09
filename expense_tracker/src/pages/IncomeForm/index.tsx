@@ -8,34 +8,7 @@ import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
 import { useDispatch, useSelector } from "react-redux";
 import { incomeActions } from "../../redux/slices/incomeSlice";
-
-// Define types
-type Transaction = {
-    id: number;
-    title: string;
-    date: string;
-    quantity: number;
-    category: string;
-}
-
-type Category = {
-    id: number;
-    type: 'cost' | 'income';
-    title: string;
-}
-
-type RootState = {
-    cost: Transaction[];
-    income: Transaction[];
-    category: Category[];
-}
-
-type FormValues = {
-    title: string;
-    quantity: number;
-    date: Date;
-    category: string;
-}
+import { RootState, FormValues } from "../../types";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -46,15 +19,16 @@ const validationSchema = Yup.object({
 
 const IncomeForm = () => {
     const dispatch = useDispatch();
-    const categories = useSelector((state: RootState) => state.category)
-    const incomeCategories = categories.filter(category => category.type === 'income');
+    const categories = useSelector((state: RootState) => state.category);
+    const incomeCategories = categories?.filter(category => category.type === 'income') || [];
+    
 
     const {
         handleSubmit,
         getValues,
         reset,
         control
-    } = useForm({
+    } = useForm<FormValues>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             title: "",

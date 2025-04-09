@@ -8,34 +8,7 @@ import FormButton from "../../components/FormButton";
 import InputOption from "../../components/InputOption";
 import { useDispatch, useSelector } from "react-redux";
 import { costActions } from "../../redux/slices/costSlice";
-
-// Define types
-type Transaction = {
-    id: number;
-    title: string;
-    date: string;
-    quantity: number;
-    category: string;
-}
-
-type Category = {
-    id: number;
-    type: 'cost' | 'income';
-    title: string;
-}
-
-type RootState = {
-    cost: Transaction[];
-    income: Transaction[];
-    category: Category[];
-}
-
-type FormValues = {
-    title: string;
-    quantity: number;
-    date: Date;
-    category: string;
-}
+import { RootState, FormValues } from "../../types";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -47,7 +20,7 @@ const validationSchema = Yup.object({
 const CostForm = () => {
     const dispatch = useDispatch();
     const categories = useSelector((state: RootState) => state.category);
-    const costCategories = categories.filter(category => category.type === 'cost');
+    const costCategories = categories?.filter(category => category.type === 'cost') || [];
     
 
     const {

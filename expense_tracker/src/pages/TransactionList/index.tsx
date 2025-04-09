@@ -1,27 +1,7 @@
 import styles from "./transactionlist.module.scss";
 import List from "../../components/List";
 import { useSelector } from "react-redux";
-
-// Define types
-type Transaction = {
-    id: number;
-    title: string;
-    date: string;
-    quantity: number;
-    category: string;
-}
-
-type Category = {
-    id: number;
-    type: 'cost' | 'income';
-    title: string;
-}
-
-type RootState = {
-    cost: Transaction[];
-    income: Transaction[];
-    category: Category[];
-}
+import { RootState } from "../../types";
 
 const TransactionList = () => {
     const { costs, incomes } = useSelector((state: RootState) => {
@@ -29,7 +9,7 @@ const TransactionList = () => {
             costs: state.cost,
             incomes: state.income
         }
-    });
+    });    
     
     
 

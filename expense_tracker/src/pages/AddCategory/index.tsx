@@ -7,16 +7,11 @@ import Input from "../../components/Input";
 import FormButton from "../../components/FormButton";
 import { useDispatch } from "react-redux";
 import { categoryActions } from "../../redux/slices/categorySlice";
-
-// Define the form's data structure
-type FormValues = {
-    title: string;
-    category_type: "cost" | "income";
-}
+import { CategoryFormValues } from "../../types";
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
-    category_type: Yup.string().oneOf(['cost', 'income']).required(),
+    category: Yup.string().oneOf(['cost', 'income']).required(),
 });
 
 const AddCategory = () => {
@@ -27,19 +22,19 @@ const AddCategory = () => {
         getValues,
         reset,
         control
-    } = useForm<FormValues>({
+    } = useForm<CategoryFormValues>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             title: "",
-            category_type: "" as "cost" | "income"
+            category: "" as "cost" | "income"
         }
     });
 
-    const onSubmit: SubmitHandler<FormValues> = (values) => {
+    const onSubmit: SubmitHandler<CategoryFormValues> = (values) => {
         const newCategory = {
             id: Date.now(),
             title: values.title,
-            type: values.category_type
+            type: values.category
         };
 
         dispatch(categoryActions.addCategory(newCategory));
@@ -48,7 +43,7 @@ const AddCategory = () => {
 
         reset({
             title: "",
-            category_type: "" as "cost" | "income"
+            category: "" as "cost" | "income"
         });
     };
 
@@ -66,7 +61,7 @@ const AddCategory = () => {
                 <div>
                     <Controller
                         control={control}
-                        name="category_type"
+                        name="category"
                         render={({field}) => (
                             <>
                                 <label htmlFor="cost">

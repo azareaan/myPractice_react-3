@@ -4,20 +4,7 @@ import PieChart from "../../components/Charts/PieChart"
 import { format, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-// Define types for costs and incomes
-type Transaction = {
-    id: number;
-    title: string;
-    date: string;
-    quantity: number;
-    category: string;
-}
-
-type RootState = {
-    cost: Transaction[];
-    income: Transaction[];
-}
+import { RootState } from "../../types";
 
 const Home = () => {
     const { costs, incomes } = useSelector((state: RootState) => {
@@ -30,7 +17,7 @@ const Home = () => {
     const aggregateCostsByCategory = (): { name: string; value: number }[] => {
         const categoryMap: Record<string, number> = {};
         costs.forEach(({ category, quantity }) => {
-            if (!category) return; // Skip if category is undefined
+            if (!category) return;
             if (!categoryMap[category]) {
                 categoryMap[category] = 0;
             }
