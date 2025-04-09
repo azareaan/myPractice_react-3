@@ -1,13 +1,27 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "./list.module.scss"
 
-const List = ({cost, income}) => {
+// Define types for costs and incomes
+type Transaction = {
+    id: number;
+    title: string;
+    date: string;
+    quantity: number;
+    category: string;
+}
+
+type RootState = {
+    cost: Transaction[];
+    income: Transaction[];
+}
+
+const List = ({cost, income}: RootState) => {
     const allTransactions = [
         ...cost.map(item => ({ ...item, type: 'cost' })),
         ...income.map(item => ({ ...item, type: 'income' }))
     ];
     
-    const searchInputRef = useRef(null);
+    const searchInputRef = useRef<HTMLInputElement>(null);
     const [filteredResults, setFilteredResults] = useState(allTransactions);
     
     const uniqueCategories = [...new Set(allTransactions.map(item => item.category))];
@@ -21,7 +35,7 @@ const List = ({cost, income}) => {
     }, [selectedCategory, dateRange, transactionType]);
 
     const handleSearch = () => {
-        const searchTerm = searchInputRef.current.value.toLowerCase();
+        const searchTerm = searchInputRef.current?.value.toLowerCase();
         handleFilterChange(searchTerm);
     };
     
@@ -56,13 +70,15 @@ const List = ({cost, income}) => {
         setFilteredResults(filteredData);
     };
     
-    const handleDateChange = (e) => {
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setDateRange(prev => ({...prev, [name]: value}));        
     };
     
     const resetFilters = () => {
-        searchInputRef.current.value = '';
+        if (searchInputRef.current) {
+            searchInputRef.current.value = '';
+        }
         setSelectedCategory('all');
         setDateRange({ startDate: '', endDate: '' });
         setTransactionType('all');

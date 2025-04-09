@@ -1,8 +1,13 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
-const getDynamicColor = (index) => `hsl(${(200 + ((index * 30) % 60)) % 360}, 70%, 50%)`;
+type LineChartData = {
+    name: string;
+    value: number;
+}[];
 
-const ExpensePieChart = ({data}) => {
+const getDynamicColor = (index: number) => `hsl(${(200 + ((index * 30) % 60)) % 360}, 70%, 50%)`;
+
+const ExpensePieChart = ({data}: {data: LineChartData}) => {
 
   return (
     <PieChart width={400} height={400}>

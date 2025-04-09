@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./layout.module.scss"
 import { Link, Outlet } from "react-router-dom";
 import { store } from "../../redux";

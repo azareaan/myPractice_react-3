@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./costform.module.scss"
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -10,6 +9,34 @@ import InputOption from "../../components/InputOption";
 import { useDispatch, useSelector } from "react-redux";
 import { costActions } from "../../redux/slices/costSlice";
 
+// Define types
+type Transaction = {
+    id: number;
+    title: string;
+    date: string;
+    quantity: number;
+    category: string;
+}
+
+type Category = {
+    id: number;
+    type: 'cost' | 'income';
+    title: string;
+}
+
+type RootState = {
+    cost: Transaction[];
+    income: Transaction[];
+    category: Category[];
+}
+
+type FormValues = {
+    title: string;
+    quantity: number;
+    date: Date;
+    category: string;
+}
+
 const validationSchema = Yup.object({
     title: Yup.string().required(),
     quantity: Yup.number().min(1).integer().required(),
@@ -19,27 +46,26 @@ const validationSchema = Yup.object({
 
 const CostForm = () => {
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.category)
+    const categories = useSelector((state: RootState) => state.category);
     const costCategories = categories.filter(category => category.type === 'cost');
     
 
     const {
             handleSubmit,
             getValues,
-            formState: {errors},
             reset,
             control
-        } = useForm({
+        } = useForm<FormValues>({
             resolver: yupResolver(validationSchema),
             defaultValues: {
                 title: "",
-                quantity: "",
-                date: "",
+                quantity: 0,
+                date: new Date(),
                 category: ""
             }
         })
     
-        const onSubmit = (values) => {
+        const onSubmit = (values: FormValues) => {
             const newCost = {
                 id: Date.now(),
                 title: values.title,
@@ -54,8 +80,8 @@ const CostForm = () => {
             
             reset({
                 title: "",
-                quantity: "",
-                date: "",
+                quantity: 0,
+                date: new Date(),
                 category: ""
             });
         }

@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./formbutton.module.scss"
 
-const FormButton = ({buttonText}) => {
+const FormButton = ({buttonText}: {buttonText: string}) => {
     return (
         <>
             <button className={styles.button}>{buttonText}</button>

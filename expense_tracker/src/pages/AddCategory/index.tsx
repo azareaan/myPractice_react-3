@@ -1,6 +1,5 @@
-import React from "react";
 import styles from "./addcategory.module.scss"
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
 import Form from "../../components/Form";
@@ -8,6 +7,12 @@ import Input from "../../components/Input";
 import FormButton from "../../components/FormButton";
 import { useDispatch } from "react-redux";
 import { categoryActions } from "../../redux/slices/categorySlice";
+
+// Define the form's data structure
+type FormValues = {
+    title: string;
+    category_type: "cost" | "income";
+}
 
 const validationSchema = Yup.object({
     title: Yup.string().required(),
@@ -20,18 +25,17 @@ const AddCategory = () => {
     const {
         handleSubmit,
         getValues,
-        formState: {errors},
         reset,
         control
-    } = useForm({
+    } = useForm<FormValues>({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             title: "",
-            category_type: ""
+            category_type: "" as "cost" | "income"
         }
     });
 
-    const onSubmit = (values) => {
+    const onSubmit: SubmitHandler<FormValues> = (values) => {
         const newCategory = {
             id: Date.now(),
             title: values.title,
@@ -44,7 +48,7 @@ const AddCategory = () => {
 
         reset({
             title: "",
-            category_type: ""
+            category_type: "" as "cost" | "income"
         });
     };
 

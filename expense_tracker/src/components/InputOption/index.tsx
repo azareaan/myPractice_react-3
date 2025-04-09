@@ -1,8 +1,7 @@
-import React from "react";
 import styles from "./inputoption.module.scss"
 import { Link } from "react-router-dom";
 
-const InputOption = ({items, label, value, onChange}) => {
+const InputOption = ({items, label, value, onChange}: {items: {id: number; title: string}[]; label: string; value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;}) => {
     return (
         <>
             <label htmlFor="selectId">{label}</label>

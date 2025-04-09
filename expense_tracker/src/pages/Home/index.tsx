@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./home.module.scss"
 import LineChart from "../../components/Charts/LineChart"
 import PieChart from "../../components/Charts/PieChart"
@@ -6,17 +5,32 @@ import { format, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+// Define types for costs and incomes
+type Transaction = {
+    id: number;
+    title: string;
+    date: string;
+    quantity: number;
+    category: string;
+}
+
+type RootState = {
+    cost: Transaction[];
+    income: Transaction[];
+}
+
 const Home = () => {
-    const { costs, incomes } = useSelector(state => {
+    const { costs, incomes } = useSelector((state: RootState) => {
         return {
             costs: state.cost,
             incomes: state.income
-        }
+        };
     });
 
-    const aggregateCostsByCategory = () => {
-        const categoryMap = {};
+    const aggregateCostsByCategory = (): { name: string; value: number }[] => {
+        const categoryMap: Record<string, number> = {};
         costs.forEach(({ category, quantity }) => {
+            if (!category) return; // Skip if category is undefined
             if (!categoryMap[category]) {
                 categoryMap[category] = 0;
             }
@@ -29,8 +43,8 @@ const Home = () => {
         }));
     };
 
-    const aggregateDataByMonth = () => {
-        const dataMap = {};
+    const aggregateDataByMonth = (): { month: string; income: number; expense: number }[] => {
+        const dataMap: Record<string, { month: string; income: number; expense: number }> = {};
 
         [...costs, ...incomes].forEach(({ date, quantity, id }) => {
             const month = format(parseISO(date), "yyyy-MM");

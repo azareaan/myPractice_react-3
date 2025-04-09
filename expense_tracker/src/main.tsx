@@ -1,13 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css'
-import Layout from './components/Layout';
-import Home from './pages/Home/index.jsx'
-import AddCategory from './pages/AddCategory/index.jsx'
-import CostForm from './pages/CostForm/index.jsx'
-import IncomeForm from './pages/IncomeForm/index.jsx'
-import TransactionList from './pages/TransactionList/index.jsx';
+import './index.css';
+import Layout from './components/Layout/index';
+import Home from './pages/Home/index';
+import AddCategory from './pages/AddCategory/index';
+import CostForm from './pages/CostForm/index';
+import IncomeForm from './pages/IncomeForm/index';
+import TransactionList from './pages/TransactionList/index';
 
 const router = createBrowserRouter([
   {
@@ -38,8 +38,13 @@ const router = createBrowserRouter([
   }
 ]);
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element not found');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-)
+);

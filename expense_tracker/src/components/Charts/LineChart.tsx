@@ -1,6 +1,12 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-const IncomeExpenseChart = ({data}) => {
+type LineChartData = {
+  month: string;
+  income: number;
+  expense: number;
+}[];
+
+const IncomeExpenseChart = ({data}: {data: LineChartData}) => {
 
   return (
     <LineChart width={500} height={300} data={data}>
